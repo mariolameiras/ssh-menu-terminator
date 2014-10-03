@@ -90,15 +90,17 @@ class SSHMenu(plugin.MenuItem):
     def menu(self, widget, terminal, data = None):
       ui = {}
 
-      window = gtk.Window(gtk.WINDOW_POPUP)
+      window = gtk.Window()
       scroll = gtk.ScrolledWindow(None, None)
       scroll.set_policy(gtk.POLICY_AUTOMATIC, gtk.POLICY_ALWAYS)
-      scroll.set_border_width(1)
+      #scroll.set_border_width(1)
 
 
       window.set_title("SSH Menu")
       window.move(1,100)
       window.resize(200,500)
+      window.set_resizable(True)
+      #window. set_decorated(False)
        # Create a new button
       buttonsbox = gtk.HBox(False, 0)
       box1 = gtk.VBox(False, 0)
@@ -116,9 +118,10 @@ class SSHMenu(plugin.MenuItem):
 
 
       
-      store = gtk.ListStore(str, str)
+      store = gtk.TreeStore(str,str)
+      rabbit = store.append(None, ["Main","men"])
       for command in self.cmd_list:
-        store.append([command['name'], command['command']])
+        store.append(rabbit,[command['name'], command['command']])
  
       treeview = gtk.TreeView(store)
       selection = treeview.get_selection()
@@ -129,10 +132,10 @@ class SSHMenu(plugin.MenuItem):
       ui['treeview'] = treeview
 
       renderer = gtk.CellRendererText()
-      column = gtk.TreeViewColumn("Name", renderer, text=CC_COL_NAME)
-      column2 = gtk.TreeViewColumn("Label", renderer, text=CC_COL_NAME)
-      treeview.set_expander_column(column)
-      treeview.append_column(column2)
+      column = gtk.TreeViewColumn("Hosts", renderer, text=CC_COL_NAME)
+
+
+      treeview.append_column(column)
 
 
 

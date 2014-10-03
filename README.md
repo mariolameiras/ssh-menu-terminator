@@ -1,2 +1,11 @@
-ssh-menu-terminator
+SSH Menu
 ===================
+
+Install
+--------
+
+
+
+How to use it
+-------------
+
